@@ -61,7 +61,7 @@ export default {
       }}, 500)
     },
     async searching() {
-        const searchResult = await fetch(`http://www.omdbapi.com/?apikey=7035c60c&s=${this.inputKeyword}&page=${this.page}`,{
+        const searchResult = await fetch(`https://www.omdbapi.com/?apikey=7035c60c&s=${this.inputKeyword}&page=${this.page}`,{
           method: 'GET',
         }).then(res => res.json())
         if (!searchResult.Error) {
