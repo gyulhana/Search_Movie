@@ -5,7 +5,7 @@
           @click.prevent="movieModal(movielist.imdbID)">
       <img :src="movielist.Poster" onerror="this.src='https://i.imgur.com/1OpTile.png';" />
       <div class="movieTitle">{{ movielist.Title }},</div>
-      {{ movielist.Year }}
+      <div>{{ movielist.Year }}</div>
     </div>
   </li>
   <div v-if="modal" class="modal-dim" @click.prevent="modalClose">
@@ -89,13 +89,13 @@ export default {
   text-align: center;
   img {
     height: 10rem;
-    width: 100%;
+    width: 8rem;
     border-radius: 15px;
     text-align: center;
   }
 }
 .movieTitle {
-  width: 100%;
+  width: 8rem;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -126,11 +126,16 @@ export default {
     color: white; 
     gap: 1rem;
     font-size: 1.3rem;
+    img {
+      width: 20rem;
+      height: 25rem;
+    }
     .text-container {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      
+      padding: 1.3rem;
+      box-sizing: border-box;
     }
   }
 }
