@@ -5,7 +5,7 @@
             placeholder="보고 싶은 영화를 검색하세요."
             ref="keyword"
             autocomplete="off"
-            v-on:keyup.prevent="searchMovies" />
+            v-on:keyup.prevent="debouncing" />
     </form>
     <div class="resultNumber" v-if="searched">
       {{ totalResults }}개의 결과를 발견했습니다.
@@ -53,10 +53,16 @@ export default {
       this.page = 1
       this.inputKeyword = ''
     },
+    async debouncing() {
+      setTimeout(() => {this.inputKeyword = this.$refs.keyword.value.trim()
+      if (this.inputKeyword.length > 2) {
+        this.searching()
+      } else {
+        this.error = true;
+      }}, 500)
+    },
     async searching() {
-      const inputKeyword = this.$refs.keyword.value.trim()
-      if (inputKeyword.length > 2) {
-        const searchResult = await fetch(`http://www.omdbapi.com/?apikey=7035c60c&s=${inputKeyword}&page=${this.page}`,{
+        const searchResult = await fetch(`http://www.omdbapi.com/?apikey=7035c60c&s=${this.inputKeyword}&page=${this.page}`,{
           method: 'GET',
         }).then(res => res.json())
         if (!searchResult.Error) {
@@ -66,9 +72,6 @@ export default {
         } else if (searchResult.Error == "Movie not found!") {
           this.noResult = true
         }
-      } else {
-        this.error = true
-      }
     },
     async searchMovies() {
       this.stateInit()
