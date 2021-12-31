@@ -22,7 +22,6 @@
       {{ page }} 페이지
       <button @click="pageUp">▶</button>
     </div>
-    <MovieDetail v-if="movieDetail" />
   </div>
 </template>
 

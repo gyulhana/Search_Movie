@@ -19,9 +19,10 @@ export default {
 
 <style lang="scss" scoped>
 .app__body {
-  padding: 1rem;
+  padding: 2.5rem;
+  box-sizing: border-box;
   height: 100%;
-  min-height: 770px;
+  min-height: 800px;
   background-color: #ffd00a;
     background-image: radial-gradient(at 47% 33%, hsl(22.22, 100%, 75%) 0, transparent 59%), radial-gradient(at 82% 65%, hsl(60.00, 100%, 76%) 0, transparent 55%);
   display: flex;
