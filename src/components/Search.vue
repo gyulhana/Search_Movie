@@ -4,7 +4,8 @@
       <input class="keyword"
             placeholder="보고 싶은 영화를 검색하세요."
             ref="keyword"
-            autocomplete="off" />
+            autocomplete="off"
+            v-on:keyup.prevent="searchMovies" />
     </form>
     <div class="resultNumber" v-if="searched">
       {{ totalResults }}개의 결과를 발견했습니다.
@@ -23,6 +24,7 @@
       {{ page }} 페이지
       <button @click="pageUp">▶</button>
     </div>
+    <MovieDetail v-if="movieDetail" />
   </div>
 </template>
 
@@ -40,7 +42,7 @@ export default {
       searched: false,
       error: false,
       noResult: false,
-      movieLists: []
+      movieLists: [],
     }
   },
   methods: {
@@ -118,12 +120,14 @@ button {
   background-color: transparent;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 1rem;
 }
 
 ul {
   display: grid;
-  grid-template-columns: repeat(4, minmax(100px, 250px));
-  grid-auto-rows: 1fr;
+  width: 90vw;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-auto-rows: 4fr;
   grid-gap: 1rem;
 }
 </style>

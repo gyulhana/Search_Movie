@@ -1,9 +1,11 @@
 <template>
   <li v-for="movielist in movielists"
   v-bind:key="movielist.imdbID">
-    <div class="movieList">
+    <div class="movieList"
+          v-on:click="movieDetail">
       <img :src="movielist.Poster" onerror="this.src='https://i.imgur.com/1OpTile.png';" />
-      {{ movielist.Title }}, {{ movielist.Year }}
+      <div class="movieTitle">{{ movielist.Title }},</div>
+      {{ movielist.Year }}
     </div>
   </li>
 </template>
@@ -18,10 +20,9 @@ export default {
 
 <style lang="scss" scoped>
 .movieList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(3, 1fr);
   gap: 0.5rem;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(16px) saturate(180%);
@@ -33,10 +34,18 @@ export default {
   overflow: inherit;
   text-align: center;
   img {
-    height: 9rem;
-    max-width: 90%;
+    height: 10rem;
+    width: 100%;
     border-radius: 15px;
+    text-align: center;
   }
+}
+.movieTitle {
+  width: 100%;
+  overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+  font-weight: 600;
 }
 
 </style>

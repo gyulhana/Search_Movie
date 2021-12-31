@@ -19,7 +19,9 @@ export default {
 
 <style lang="scss" scoped>
 .app__body {
-  height: 100vh;
+  padding: 1rem;
+  height: 100%;
+  min-height: 770px;
   background-color: #ffd00a;
     background-image: radial-gradient(at 47% 33%, hsl(22.22, 100%, 75%) 0, transparent 59%), radial-gradient(at 82% 65%, hsl(60.00, 100%, 76%) 0, transparent 55%);
   display: flex;
