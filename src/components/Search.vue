@@ -1,12 +1,10 @@
 <template>
   <div class="search">
-    <form @submit.prevent="searchMovies">
       <input class="keyword"
             placeholder="보고 싶은 영화를 검색하세요."
             ref="keyword"
             autocomplete="off"
-            v-on:keyup.prevent="debouncing" />
-    </form>
+            v-on:keyup.prevent="searchingInput" />
     <div class="resultNumber" v-if="searched">
       {{ totalResults }}개의 결과를 발견했습니다.
     </div>
@@ -53,12 +51,14 @@ export default {
       this.page = 1
       this.inputKeyword = ''
     },
-    async debouncing() {
+    async searchingInput() {
       setTimeout(() => {this.inputKeyword = this.$refs.keyword.value.trim()
       if (this.inputKeyword.length > 2) {
+        this.error = false
         this.searching()
       } else {
-        this.error = true;
+        this.stateInit()
+        this.error = true
       }}, 500)
     },
     async searching() {
@@ -69,13 +69,11 @@ export default {
           this.totalResults = searchResult.totalResults
           this.movieLists = searchResult.Search
           this.searched = true
+          this.noResult = false
         } else if (searchResult.Error == "Movie not found!") {
+          this.stateInit()
           this.noResult = true
         }
-    },
-    async searchMovies() {
-      this.stateInit()
-      this.searching()
     },
     async pageUp() {
       if (this.totalResults / 10 > this.page) {
